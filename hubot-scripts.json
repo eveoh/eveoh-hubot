@@ -4,5 +4,6 @@
 	"room-info.coffee",
 	"github-status.coffee",
 	"github-credentials.coffee",
-	"github-pulls"
+	"github-pulls.coffee",
+	"github-issue-link.coffee"
 ]
