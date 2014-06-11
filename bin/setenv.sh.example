@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export HUBOT_AUTH_ADMIN="user"
+
+export HUBOT_IRC_SERVER="irc.eveoh.nl"
+export HUBOT_IRC_ROOMS="#channel channelpass"
+export HUBOT_IRC_PORT=6697
+export HUBOT_IRC_UNFLOOD="true"
+export HUBOT_IRC_USESSL="true"
+export HUBOT_IRC_SERVER_FAKE_SSL="true"
+export HUBOT_IRC_DEBUG="true"
+export HUBOT_IRC_NICKSERV_USERNAME="botusername"
+export HUBOT_IRC_NICKSERV_PASSWORD="botpassword"
+export HUBOT_IRC_PRIVATE="true"
