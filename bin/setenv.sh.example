@@ -12,3 +12,7 @@ export HUBOT_IRC_DEBUG="true"
 export HUBOT_IRC_NICKSERV_USERNAME="botusername"
 export HUBOT_IRC_NICKSERV_PASSWORD="botpassword"
 export HUBOT_IRC_PRIVATE="true"
+
+export HUBOT_GITHUB_TOKEN="xxx"
+export HUBOT_GITHUB_USER="eveoh"
+export HUBOT_GITHUB_ORG="eveoh"

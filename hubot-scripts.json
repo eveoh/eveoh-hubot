@@ -3,5 +3,6 @@
 	"shipit.coffee",
 	"room-info.coffee",
 	"github-status.coffee",
-	"github-credentials.coffee"
+	"github-credentials.coffee",
+	"github-pulls"
 ]
