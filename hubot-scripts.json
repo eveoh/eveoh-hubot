@@ -1,6 +1,7 @@
 [
 	"redis-brain.coffee", 
 	"shipit.coffee",
+	"giphy.coffee",
 	"room-info.coffee",
 	"github-status.coffee",
 	"github-credentials.coffee",
