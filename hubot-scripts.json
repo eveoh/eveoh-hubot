@@ -7,6 +7,5 @@
 	"github-credentials.coffee",
 	"github-pulls.coffee",
 	"github-issue-link.coffee",
-	"github-merge.coffee",
 	"jenkins-notifier.coffee"
 ]
