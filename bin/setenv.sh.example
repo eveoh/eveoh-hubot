@@ -21,3 +21,7 @@ export HUBOT_GITHUB_REPO="mytimetable"
 export HUBOT_GIPHY_API_KEY="xxx"
 
 export HUBOT_POULE_ID="xxx"
+
+export HUBOT_SLACK_TOKEN=xxx
+export HUBOT_SLACK_TEAM=eveoh
+export HUBOT_SLACK_BOTNAME=hubot
