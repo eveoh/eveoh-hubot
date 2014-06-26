@@ -63,7 +63,7 @@ module.exports = (robot) ->
 
       # Handle PR event
       if req.headers["x-github-event"] == "pull_request" and "pull_request" not in ignoredEvents
-          robot.send user, "[#{payload.repository.name}] #{payload.pull_request.user.login} #{payload.action} pull request '#{payload.pull_request.body}': #{payload.pull_request.html_url}"
+          robot.send user, "[#{payload.repository.name}] #{payload.pull_request.user.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
 
       # Handle issues event
       if req.headers["x-github-event"] == "issues" and "issues" not in ignoredEvents
