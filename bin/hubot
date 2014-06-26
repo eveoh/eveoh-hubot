@@ -7,5 +7,5 @@ fi
 npm install
 export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
 
-exec node_modules/.bin/hubot --name eveoh -a slack -a irc "$@"
+exec node_modules/.bin/hubot --name eveoh -a irc "$@"
 
