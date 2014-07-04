@@ -65,13 +65,15 @@ module.exports = (robot) ->
     payload = data.payload
     user = data.user
 
+    if payload.sender.login == "eveoh-ci"
+
     msg = "[#{payload.repository.name}] "
 
-    switch payload.state
-      when "pending" then msg += "Build started"
-      when "failure" then msg += "Build failed"
-      when "success" then msg += "Build succeeded"
+      switch payload.state
+        when "pending" then msg += "Build started"
+        when "failure" then msg += "Build failed"
+        when "success" then msg += "Build succeeded"
 
-    if payload.target_url? then msg += " (" + payload.target_url + ")"
+      if payload.target_url? then msg += " (" + payload.target_url + ")"
 
-    robot.send user, msg
+      robot.send user, msg
