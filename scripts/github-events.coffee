@@ -17,7 +17,7 @@
 #
 # Authors:
 #   nesQuick
-#   marcorkikke
+#   marcokrikke
 
 url = require('url')
 querystring = require('querystring')
@@ -38,36 +38,34 @@ module.exports = (robot) ->
     try
       payload = req.body
 
+      data = {
+        user: user,
+        payload: payload
+      }
+
       # Handle Push event
       if req.headers["x-github-event"] == "push" and "push" not in ignoredEvents
-        if payload.commits.length > 0
-          commitWord = if payload.commits.length > 1 then "commits" else "commit"
-
-          robot.send user, "[#{payload.repository.name}] #{payload.pusher.name} pushed #{payload.commits.length} new #{commitWord}: #{payload.compare}"
-
-          # Display the last 4 commits
-          for commit in payload.commits[-4..]
-            # Only consider first line of the commit message
-            message = commit.message.split "\n", 1
-            message = message[0]
-
-            robot.send user, "[#{payload.repository.name}] * #{commit.id[0..6]} - #{commit.author.username}: #{message}"
-      
+        robot.emit "github-push", data
+              
       # Handle Create event
       if req.headers["x-github-event"] == "create" and "create" not in ignoredEvents
-          robot.send user, "[#{payload.repository.name}] #{payload.sender.login} created #{payload.ref_type}: #{payload.ref}"
+        robot.emit "github-create", data
 
       # Handle Delete event
       if req.headers["x-github-event"] == "delete" and "delete" not in ignoredEvents
-          robot.send user, "[#{payload.repository.name}] #{payload.sender.login} deleted #{payload.ref_type}: #{payload.ref}"
+        robot.emit "github-delete", data
 
       # Handle PR event
       if req.headers["x-github-event"] == "pull_request" and "pull_request" not in ignoredEvents
-          robot.send user, "[#{payload.repository.name}] #{payload.pull_request.user.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
+        robot.emit "github-pull_request", data
 
       # Handle issues event
       if req.headers["x-github-event"] == "issues" and "issues" not in ignoredEvents
-          robot.send user, "[#{payload.repository.name}] #{payload.issue.user.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
+        robot.emit "github-issues", data
+
+      # Handle status event
+      if req.headers["x-github-event"] == "status" and "status" not in ignoredEvents
+        robot.emit "github-status", data
 
     catch error
       console.log "github-hook error: #{error}. Payload: #{req.body.payload}"
