@@ -18,15 +18,22 @@
 #   marcokrikke
 
 url = require('url')
+querystring = require('querystring')
 
 module.exports = (robot) ->
 
   robot.router.post "/hubot/nagios-events", (req, res) ->
+    query = querystring.parse(url.parse(req.url).query)
+
     res.end('')
+
+    user = {}
+    user.room = query.room if query.room
+    user.type = query.type if query.type
 
     try
       data = {
-        user: req.body.room,
+        user: user,
         payload: req.body
       }
 
