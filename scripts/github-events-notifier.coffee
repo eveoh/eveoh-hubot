@@ -61,3 +61,17 @@ module.exports = (robot) ->
 
     robot.send user, "[#{payload.repository.name}] #{payload.issue.user.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
 
+  robot.on "github-status", (data) ->
+    payload = data.payload
+    user = data.user
+
+    msg = "[#{payload.repository.name}] "
+
+    switch payload.state
+      when "pending" then msg += "Build started"
+      when "failure" then msg += "Build failed"
+      when "success" then msg += "Build succeeded"
+
+    if payload.target_url? then msg += " (" + payload.target_url + ")"
+
+    robot.send user, msg
