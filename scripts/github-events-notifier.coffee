@@ -1,26 +1,20 @@
 # Description:
-#   An HTTP Listener for events from a Github webhook
+#   Posts Github status messages to the room
 #
 # Dependencies:
-#   "url": ""
-#   "querystring": ""
+#   None
 #
 # Configuration:
-#   HUBOT_IGNORED_GITHUB_EVENTS - contains a comma separated list of events to ignore
-#   Put this url <HUBOT_URL>:<PORT>/hubot/gh-events?room=<room> into your github hooks
+#   None
 #
 # Commands:
 #   None
 #
 # URLS:
-#   POST /hubot/gh-events?room=<room>[&type=<type]
+#   None
 #
 # Authors:
-#   nesQuick
-#   marcorkikke
-
-url = require('url')
-querystring = require('querystring')
+#   marcokrikke
 
 module.exports = (robot) ->
 
@@ -56,6 +50,8 @@ module.exports = (robot) ->
   robot.on "github-pull_request", (data) ->
     payload = data.payload
     user = data.user
+
+    if payload.action == 'synchronize' then payload.action = 'synchronized'
 
     robot.send user, "[#{payload.repository.name}] #{payload.pull_request.user.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
 
