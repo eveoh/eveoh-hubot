@@ -66,8 +66,7 @@ module.exports = (robot) ->
     user = data.user
 
     if payload.sender.login == "eveoh-ci"
-
-    msg = "[#{payload.repository.name}] "
+      msg = "[#{payload.repository.name}] "
 
       switch payload.state
         when "pending" then msg += "Build started"
