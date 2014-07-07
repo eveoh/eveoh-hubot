@@ -69,7 +69,8 @@ module.exports = (robot) ->
       msg = "[#{payload.repository.name}] "
 
       switch payload.state
-        when "pending" then msg += "Build started"
+        when "pending" 
+          if payload.target_url? then msg += "Build started" else msg += "Build triggered"
         when "failure" then msg += "Build failed"
         when "success" then msg += "Build succeeded"
 
