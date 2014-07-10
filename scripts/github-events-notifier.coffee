@@ -72,6 +72,7 @@ module.exports = (robot) ->
         when "pending" 
           if payload.target_url? then msg += "Build started" else msg += "Build triggered"
         when "failure" then msg += "Build failed"
+        when "error" then msg += "Build error"
         when "success" then msg += "Build succeeded"
 
       if payload.target_url? then msg += " (" + payload.target_url + ")"
