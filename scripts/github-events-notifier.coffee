@@ -59,7 +59,7 @@ module.exports = (robot) ->
     payload = data.payload
     user = data.user
 
-    robot.send user, "[#{payload.repository.name}] #{payload.issue.user.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
+    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
 
   robot.on "github-status", (data) ->
     payload = data.payload
