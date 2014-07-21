@@ -53,7 +53,7 @@ module.exports = (robot) ->
 
     if payload.action == 'synchronize' then payload.action = 'synchronized'
 
-    robot.send user, "[#{payload.repository.name}] #{payload.pull_request.user.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
+    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
 
   robot.on "github-issues", (data) ->
     payload = data.payload
