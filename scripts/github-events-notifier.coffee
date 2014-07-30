@@ -53,13 +53,23 @@ module.exports = (robot) ->
 
     if payload.action == 'synchronize' then payload.action = 'synchronized'
 
-    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
+    if payload.action == 'assigned'
+      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}' to #{payload.assignee.login}: #{payload.pull_request.html_url}"
+    else if payload.action == 'unassigned'
+      # do nothing
+    else
+      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
 
   robot.on "github-issues", (data) ->
     payload = data.payload
     user = data.user
 
-    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
+    if payload.action == 'assigned'
+      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}' to #{payload.assignee.login}: #{payload.issue.html_url}"
+    else if payload.action == 'unassigned'
+      # do nothing
+    else
+      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
 
   robot.on "github-status", (data) ->
     payload = data.payload
