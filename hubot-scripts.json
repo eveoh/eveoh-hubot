@@ -7,5 +7,5 @@
 	"github-credentials.coffee",
 	"github-pulls.coffee",
 	"github-issue-link.coffee",
-	"jenkins-notifier.coffee"
+	"xkcd.coffee"
 ]
