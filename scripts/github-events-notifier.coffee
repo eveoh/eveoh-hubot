@@ -52,11 +52,9 @@ module.exports = (robot) ->
     payload = data.payload
     user = data.user
 
-    if payload.action == 'synchronize' then payload.action = 'synchronized'
-
     if payload.action == 'assigned'
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}' to #{payload.assignee.login}: #{payload.pull_request.html_url}"
-    else if payload.action == 'unassigned'
+    else if payload.action == 'synchronize' or payload.action == 'unassigned' or payload.action == 'labeled' or payload.action == 'unlabeled'
       # do nothing
     else
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
@@ -67,7 +65,7 @@ module.exports = (robot) ->
 
     if payload.action == 'assigned'
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}' to #{payload.assignee.login}: #{payload.issue.html_url}"
-    else if payload.action == 'unassigned'
+    else if payload.action == 'unassigned' or payload.action == 'labeled' or payload.action == 'unlabeled'
       # do nothing
     else
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
