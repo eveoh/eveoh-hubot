@@ -25,8 +25,9 @@ module.exports = (robot) ->
     if payload.commits.length > 0
       commitWord = if payload.commits.length > 1 then "commits" else "commit"
       pushWord = if payload.forced then "force pushed" else "pushed"
+      branch = payload.ref.replace /refs\/heads\//, ''
 
-      robot.send user, "[#{payload.repository.name}] #{payload.pusher.name} #{pushWord} #{payload.commits.length} new #{commitWord}: #{payload.compare}"
+      robot.send user, "[#{payload.repository.name}] #{payload.pusher.name} #{pushWord} #{payload.commits.length} new #{commitWord} to #{branch}: #{payload.compare}"
 
       # Display the last 4 commits
       for commit in payload.commits[-4..]
