@@ -7,5 +7,6 @@
 	"github-credentials.coffee",
 	"github-pulls.coffee",
 	"github-issue-link.coffee",
-	"xkcd.coffee"
+	"xkcd.coffee",
+	"applause.coffee"
 ]
