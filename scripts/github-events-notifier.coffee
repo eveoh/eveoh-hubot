@@ -29,14 +29,6 @@ module.exports = (robot) ->
 
       robot.send user, "[#{payload.repository.name}] #{payload.pusher.name} #{pushWord} #{payload.commits.length} new #{commitWord} to #{branch}: #{payload.compare}"
 
-      # Display the last 4 commits
-      for commit in payload.commits[-4..]
-        # Only consider first line of the commit message
-        message = commit.message.split "\n", 1
-        message = message[0]
-
-        robot.send user, "[#{payload.repository.name}] * #{commit.id[0..6]} - #{commit.author.username}: #{message}"
-
   robot.on "github-create", (data) ->
     payload = data.payload
     user = data.user
@@ -79,8 +71,6 @@ module.exports = (robot) ->
       msg = "[#{payload.repository.name}] "
 
       switch payload.state
-        when "pending" 
-          if payload.target_url? then msg += "Build started" else msg += "Build triggered"
         when "failure" then msg += "Build failed"
         when "error" then msg += "Build error"
         when "success" then msg += "Build succeeded"
