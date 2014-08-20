@@ -77,4 +77,5 @@ module.exports = (robot) ->
 
       if payload.target_url? then msg += " (" + payload.target_url + ")"
 
-      robot.send user, msg
+      if payload.state != "pending"
+        robot.send user, msg
