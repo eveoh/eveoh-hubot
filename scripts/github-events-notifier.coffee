@@ -79,3 +79,10 @@ module.exports = (robot) ->
 
       if payload.state != "pending"
         robot.send user, msg
+
+  robot.on "github-repository", (data) ->
+      payload = data.payload
+      user = data.user
+
+      robot.send user, "#{payload.sender.login} #{payload.action} repository: #{payload.repository.full_name}"
+

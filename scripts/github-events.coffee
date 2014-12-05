@@ -67,5 +67,9 @@ module.exports = (robot) ->
       if req.headers["x-github-event"] == "status" and "status" not in ignoredEvents
         robot.emit "github-status", data
 
+      # Handle repository event
+      if req.headers["x-github-event"] == "repository" and "repository" not in ignoredEvents
+        robot.emit "github-repository", data
+
     catch error
       console.log "github-hook error: #{error}. Payload: #{req.body.payload}"
