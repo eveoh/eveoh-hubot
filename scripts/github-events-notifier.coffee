@@ -83,6 +83,7 @@ module.exports = (robot) ->
   robot.on "github-repository", (data) ->
       payload = data.payload
       user = data.user
+      visibility = if payload.repository.private then "private" else "public"
 
-      robot.send user, "#{payload.sender.login} #{payload.action} repository: #{payload.repository.full_name}"
+      robot.send user, "#{payload.sender.login} #{payload.action} #{visibility} repository: #{payload.repository.full_name}"
 
