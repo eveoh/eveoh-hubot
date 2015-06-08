@@ -1,0 +1,19 @@
+[Unit]
+Description=Hubot
+Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/hubot
+User=hubot
+
+Restart=always
+RestartSec=10
+
+Environment=HUBOT_AUTH_ADMIN=marco HUBOT_IRC_SERVER=xxx "HUBOT_IRC_ROOMS=#xx xx" HUBOT_IRC_PORT=xxxx HUBOT_IRC_UNFLOOD=true HUBOT_IRC_USESSL=true HUBOT_IRC_SERVER_FAKE_SSL=true HUBOT_IRC_DEBUG=true HUBOT_IRC_NICKSERV_USERNAME=eveoh HUBOT_IRC_NICKSERV_PASSWORD=xxx HUBOT_IRC_PRIVATE=true HUBOT_GIPHY_API_KEY=xxx HUBOT_SPARK_DEVICE_ID=xxx HUBOT_SPARK_ACCESS_TOKEN=xxx HUBOT_GITHUB_TOKEN=xxx HUBOT_GITHUB_USER=eveoh HUBOT_GITHUB_ORG=eveoh HUBOT_GITHUB_REPO=mytimetable
+
+ExecStart=/opt/hubot/bin/hubot --name eveoh --adapter irc
+
+[Install]
+WantedBy=multi-user.target

@@ -1,10 +1,8 @@
 [
 	"giphy.coffee",
-	"room-info.coffee",
 	"github-status.coffee",
 	"github-credentials.coffee",
 	"github-pulls.coffee",
 	"github-issue-link.coffee",
-	"xkcd.coffee",
 	"applause.coffee"
 ]
