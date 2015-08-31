@@ -1,5 +1,5 @@
 # Description:
-#   Triggers a release job in Jenkins
+#   Triggers a publish job in Jenkins
 #
 # Configuration:
 #   HUBOT_JENKINS_URL - link to Jenkins, e.g. http://internal-jenkins:8080, without trailing /
@@ -8,15 +8,15 @@
 #
 # Commands:
 #   hubot set jenkins token for <user> to <token> - assign a Jenkins access token to a user
-#   hubot release <project> commit <commitSha1> - start release job for project and commit
-#   hubot release <project> tag <tag> - start release job for project and tag
-#   hubot release <project> branch <branch> - start release job for project and branch
+#   hubot publish <project> commit <commitSha1> - start publish job for project and commit
+#   hubot publish <project> tag <tag> - start publish job for project and tag
+#   hubot publish <project> branch <branch> - start publish job for project and branch
 #
 # Examples:
 #   hubot set jenkins token for foo to bar
-#   hubot release jenkins-ci commit fa3cd16
-#   hubot release jenkins-ci tag v1.0.1
-#   hubot release jenkins-ci branch master
+#   hubot publish jenkins-ci commit fa3cd16
+#   hubot publish jenkins-ci tag v1.0.1
+#   hubot publish jenkins-ci branch master
 #
 # Authors:
 #   marcokrikke
@@ -24,26 +24,26 @@
 module.exports = (robot) ->
   robot.brain.data.jenkinstokens ?= {}
 
-  robot.respond /release (.*) commit ([0-9a-f]{5,40})/i, (msg) ->
+  robot.respond /publish (.*) commit ([0-9a-f]{5,40})/i, (msg) ->
     repo = msg.match[1]
     specifier = msg.match[2]
 
-    startReleaseJob(msg, repo, specifier)
+    startPublishJob(msg, repo, specifier)
 
-  robot.respond /release (.*) tag (.*)/i, (msg) ->
+  robot.respond /publish (.*) tag (.*)/i, (msg) ->
     repo = msg.match[1]
     specifier = "refs/tags/#{msg.match[2]}"
 
-    startReleaseJob(msg, repo, specifier)
+    startPublishJob(msg, repo, specifier)
 
-  robot.respond /release (.*) branch (.*)/i, (msg) ->
+  robot.respond /publish (.*) branch (.*)/i, (msg) ->
     repo = msg.match[1]
     specifier = "refs/heads/#{msg.match[2]}"
 
-    startReleaseJob(msg, repo, specifier)
+    startPublishJob(msg, repo, specifier)
 
 
-  startReleaseJob = (msg, repo, specifier) ->
+  startPublishJob = (msg, repo, specifier) ->
     data = JSON.stringify({
       parameter: [
         {
@@ -54,7 +54,7 @@ module.exports = (robot) ->
     })
 
     hubotUser = msg.message.user.name
-    repoJob = "#{repo}-release"
+    repoJob = "#{repo}-publish"
 
     # Check if token exists for Hubot user, otherwise use global account
     if robot.brain.data.jenkinstokens[hubotUser]?
@@ -67,13 +67,13 @@ module.exports = (robot) ->
     .header('Content-Type', 'application/x-www-form-urlencoded')
     .post("json=#{data}") (err, res, body) ->
       if err
-        msg.reply "[release] Jenkins says: #{err}"
+        msg.reply "[publish] Jenkins says: #{err}"
       else if 201 == res.statusCode
-        msg.reply "[release] Release build started for project #{repo} and specifier #{specifier}"
+        msg.reply "[publish] Publish build started for project #{repo} and specifier #{specifier}"
       else if 404 == res.statusCode
-        msg.reply "[release] No release job found for repository #{repo}"
+        msg.reply "[publish] No publish job found for repository #{repo}"
       else
-        msg.reply "[release] Jenkins says: Status #{res.statusCode}"
+        msg.reply "[publish] Jenkins says: Status #{res.statusCode}"
 
   robot.respond /set jenkins token for ([\w\d]+) to ([\w\d]+)$/i, (msg) ->
     jenkinsUsername = msg.match[1]
