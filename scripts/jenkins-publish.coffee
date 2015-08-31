@@ -67,13 +67,13 @@ module.exports = (robot) ->
     .header('Content-Type', 'application/x-www-form-urlencoded')
     .post("json=#{data}") (err, res, body) ->
       if err
-        msg.reply "[publish] Jenkins says: #{err}"
+        msg.send "[publish] Jenkins says: #{err}"
       else if 201 == res.statusCode
-        msg.reply "[publish] Publish build started for project #{repo} and specifier #{specifier}"
+        msg.send "[publish] Publish build started for project #{repo} and specifier #{specifier}"
       else if 404 == res.statusCode
-        msg.reply "[publish] No publish job found for repository #{repo}"
+        msg.send "[publish] No publish job found for repository #{repo}"
       else
-        msg.reply "[publish] Jenkins says: Status #{res.statusCode}"
+        msg.send "[publish] Jenkins says: Status #{res.statusCode}"
 
   robot.respond /set jenkins token for ([\w\d]+) to ([\w\d]+)$/i, (msg) ->
     jenkinsUsername = msg.match[1]
