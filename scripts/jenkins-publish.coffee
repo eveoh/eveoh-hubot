@@ -86,20 +86,19 @@ module.exports = (robot) ->
     robot.brain.data.jenkinstokens[hubotUser].username = jenkinsUsername
     robot.brain.data.jenkinstokens[hubotUser].token = jenkinsToken
 
-    msg.reply "Jenkins token saved for user #{hubotUser}: Jenkins username '#{jenkinsUsername}', token '#{jenkinsToken}'"
-
+    msg.send "Jenkins token saved for user #{hubotUser}: Jenkins username '#{jenkinsUsername}', token '#{jenkinsToken}'"
 
   robot.respond /show jenkins token/i, (msg) ->
     hubotUser = msg.message.user.name
 
     if robot.brain.data.jenkinstokens[hubotUser]?
-      msg.reply "Jenkins token found for Hubot user #{hubotUser}: Jenkins username '#{robot.brain.data.jenkinstokens[hubotUser].username}', token '#{robot.brain.data.jenkinstokens[hubotUser].token}'"
+      msg.send "Jenkins token found for Hubot user #{hubotUser}: Jenkins username '#{robot.brain.data.jenkinstokens[hubotUser].username}', token '#{robot.brain.data.jenkinstokens[hubotUser].token}'"
     else
-      msg.reply "No Jenkins token found for user #{hubotUser}"
+      msg.send "No Jenkins token found for user #{hubotUser}"
 
   robot.respond /remove jenkins token/i, (msg) ->
     hubotUser = msg.message.user.name
 
     robot.brain.data.jenkinstokens[hubotUser] = undefined
 
-    msg.reply "Jenkins token removed for user #{hubotUser}"
+    msg.send "Jenkins token removed for user #{hubotUser}"
