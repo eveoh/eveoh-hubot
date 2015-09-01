@@ -7,7 +7,9 @@
 #   HUBOT_JENKINS_CI_USER_TOKEN - token of dedicated Jenkins user used to perform builds
 #
 # Commands:
-#   hubot set jenkins token for <user> to <token> - assign a Jenkins access token to a user
+#   hubot set jenkins token for <jenkinsuser> to <token> - assign a Jenkins user and access token to a Hubot user
+#   hubot show jenkins token - display the Jenkins token for the Hubot user
+#   hubot remove jenkins token - remove the Jenkins token for the Hubot user
 #   hubot publish <project> commit <commitSha1> - start publish job for project and commit
 #   hubot publish <project> tag <tag> - start publish job for project and tag
 #   hubot publish <project> branch <branch> - start publish job for project and branch
@@ -75,13 +77,29 @@ module.exports = (robot) ->
       else
         msg.send "[publish] Jenkins says: Status #{res.statusCode}"
 
-  robot.respond /set jenkins token for ([\w\d]+) to ([\w\d]+)$/i, (msg) ->
+  robot.respond /set jenkins token for ([\w\d]+) to ([\w\d-]+)$/i, (msg) ->
     jenkinsUsername = msg.match[1]
-    jenkinsToken = msg.match[3]
+    jenkinsToken = msg.match[2]
     hubotUser = msg.message.user.name
 
     robot.brain.data.jenkinstokens[hubotUser] ?= {}
     robot.brain.data.jenkinstokens[hubotUser].username = jenkinsUsername
     robot.brain.data.jenkinstokens[hubotUser].token = jenkinsToken
 
-    msg.reply "Jenkins token saved for user #{hubotUser}"
+    msg.reply "Jenkins token saved for user #{hubotUser}: Jenkins username '#{jenkinsUsername}', token '#{jenkinsToken}'"
+
+
+  robot.respond /show jenkins token/i, (msg) ->
+    hubotUser = msg.message.user.name
+
+    if robot.brain.data.jenkinstokens[hubotUser]?
+      msg.reply "Jenkins token found for Hubot user #{hubotUser}: Jenkins username '#{robot.brain.data.jenkinstokens[hubotUser].username}', token '#{robot.brain.data.jenkinstokens[hubotUser].token}'"
+    else
+      msg.reply "No Jenkins token found for user #{hubotUser}"
+
+  robot.respond /remove jenkins token/i, (msg) ->
+    hubotUser = msg.message.user.name
+
+    robot.brain.data.jenkinstokens[hubotUser] = undefined
+
+    msg.reply "Jenkins token removed for user #{hubotUser}"
