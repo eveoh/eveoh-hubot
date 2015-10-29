@@ -5,6 +5,7 @@
   "author": "Marco Krikke <marco@eveoh.nl>",
   "description": "Hubot make me a sandwich",
   "dependencies": {
+    "cron": "1.0.9",
     "githubot": "1.0.0",
     "hubot": "2.16.0",
     "hubot-auth": "1.2.0",
