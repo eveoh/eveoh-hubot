@@ -1,4 +1,4 @@
-# Eveoh Hubot [![Dependency Status](https://david-dm.org/eveoh/eveoh-hubot.svg)](https://david-dm.org/eveoh/eveoh-hubot)
+# Eveoh Hubot [![Build Status](https://travis-ci.org/eveoh/eveoh-hubot.svg?branch=master)](https://travis-ci.org/eveoh/eveoh-hubot) [![Dependency Status](https://david-dm.org/eveoh/eveoh-hubot.svg)](https://david-dm.org/eveoh/eveoh-hubot)
 
 
 eveoh-hubot is a chat bot built on the [Hubot][hubot] framework. It was
