@@ -83,3 +83,9 @@ module.exports = (robot) ->
 
       robot.send user, "#{payload.sender.login} #{payload.action} #{visibility} repository: #{payload.repository.full_name}"
 
+  robot.on "github-gollum", (data) ->
+    payload = data.payload
+    user = data.user
+
+    for page in payload.pages
+      robot.send user, "#{payload.sender.login} #{page.action} Wiki page #{page.page_name}: #{page.html_url}"
