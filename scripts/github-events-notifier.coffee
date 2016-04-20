@@ -45,7 +45,7 @@ module.exports = (robot) ->
     payload = data.payload
     user = data.user
 
-    if payload.action = 'assigned'
+    if payload.action == 'assigned'
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}' to #{payload.assignee.login}: #{payload.pull_request.html_url}"
     else if payload.action in ['opened', 'closed', 'reopened']
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
