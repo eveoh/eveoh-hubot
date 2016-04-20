@@ -63,7 +63,8 @@ module.exports = (robot) ->
     payload = data.payload
     user = data.user
 
-    if payload.sender.login == "eveoh-ci"
+    # Status event from Jenkins / Travis
+    if payload.sender.login == "eveoh-ci" or payload.context == "continuous-integration/travis-ci/push"
       msg = "[#{payload.repository.name}] "
 
       switch payload.state
