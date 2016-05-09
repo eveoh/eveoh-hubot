@@ -15,7 +15,8 @@ desks = [
   "https://media.giphy.com/media/7FN3Fg7VBJCN2/giphy.gif",
   "https://media.giphy.com/media/Oq6hxnYRu1hgA/giphy.gif",
   "https://media.giphy.com/media/l41m1PRth6MO50jzG/giphy.gif",
-  "https://media.giphy.com/media/3osxYiUPAemiORWa4w/giphy.gif"
+  "https://media.giphy.com/media/3osxYiUPAemiORWa4w/giphy.gif",
+  "https://media.giphy.com/media/69hh4034OYSUo/giphy.gif"
 ]
 
 
