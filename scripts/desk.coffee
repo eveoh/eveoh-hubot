@@ -1,10 +1,10 @@
 # Description:
-#   Alert when the weekend begins.
+#   Alert when the cleaner will come by.
 #
 # Commands:
 
 TIMEZONE = "Europe/Amsterdam"
-WEEKEND_TIME = '00 00 13 * * 1' # Mon 1pm
+CRON = '00 00 13 * * 1' # Mon 1pm
 ROOM = "#eveoh"
 
 desks = [
@@ -23,7 +23,7 @@ desks = [
 cronJob = require('cron').CronJob
 
 module.exports = (robot) ->
-  new cronJob WEEKEND_TIME,
+  new cronJob CRON,
     ->
       robot.messageRoom ROOM, "Morgen komt de schoonmaker weer!"
       robot.messageRoom ROOM, desks[Math.floor(Math.random() * desks.length)];
