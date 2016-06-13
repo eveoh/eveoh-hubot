@@ -4,7 +4,7 @@
 # Commands:
 
 TIMEZONE = "Europe/Amsterdam"
-CRON = '00 00 13 * * 1' # Mon 1pm
+CRON = '00 00 16 * * 1' # Mon 1pm
 ROOM = "#eveoh"
 
 desks = [
