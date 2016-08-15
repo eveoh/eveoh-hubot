@@ -16,7 +16,13 @@ desks = [
   "https://media.giphy.com/media/Oq6hxnYRu1hgA/giphy.gif",
   "https://media.giphy.com/media/l41m1PRth6MO50jzG/giphy.gif",
   "https://media.giphy.com/media/3osxYiUPAemiORWa4w/giphy.gif",
-  "https://media.giphy.com/media/69hh4034OYSUo/giphy.gif"
+  "https://media.giphy.com/media/69hh4034OYSUo/giphy.gif",
+  "https://media.giphy.com/media/xTiTnyb9oJUqkfCYyk/giphy.gif",
+  "https://media.giphy.com/media/HIrYP4RI9DpLy/giphy.gif",
+  "https://media.giphy.com/media/DZu3mnCcmsJKE/giphy.gif",
+  "https://media.giphy.com/media/LhVGZXspUHbhK/giphy.gif",
+  "https://media.giphy.com/media/PDjBHZrqe3Haw/giphy.gif",
+  "https://media.giphy.com/media/AgkmVdBGLcor6/giphy.gif"
 ]
 
 
