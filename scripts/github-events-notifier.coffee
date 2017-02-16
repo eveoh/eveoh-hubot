@@ -47,6 +47,8 @@ module.exports = (robot) ->
 
     if payload.action == 'assigned'
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}' to #{payload.assignee.login}: #{payload.pull_request.html_url}"
+    else if payload.action == 'review_requested'
+      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} requested a review from #{payload.requested_reviewer.login} for pull request ##{payload.pull_request.number} '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
     else if payload.action in ['opened', 'closed', 'reopened']
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
 
