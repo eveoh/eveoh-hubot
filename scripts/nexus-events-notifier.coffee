@@ -22,4 +22,4 @@ module.exports = (robot) ->
     payload = data.payload
     user = data.user
 
-    robot.send user, "[#{payload.repositoryName}] new artifact created #{payload.group}:#{payload.name}:#{payload.version}"
+    robot.send user, "[#{payload.repositoryName}] new artifact created #{payload.component.group}:#{payload.component.name}:#{payload.component.version}"
