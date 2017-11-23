@@ -7,6 +7,7 @@
 #
 # Configuration:
 #   HUBOT_IGNORED_GITHUB_EVENTS - contains a comma separated list of events to ignore
+#   HUBOT_GITHUB_SHARED_SECRET - shared secret used to verify GitHub webhook messages
 #   Put this url <HUBOT_URL>:<PORT>/hubot/gh-events?room=<room> into your github hooks
 #
 # Commands:
@@ -21,6 +22,7 @@
 
 url = require('url')
 querystring = require('querystring')
+crypto = require('crypto')
 
 module.exports = (robot) ->
 
@@ -47,6 +49,14 @@ module.exports = (robot) ->
 
     try
       payload = req.body
+
+      # Verify the request
+      secret = process.env.HUBOT_GITHUB_SHARED_SECRET
+      signature = req.headers["X-Hub-Signature"]
+      computedSignature = 'sha1=' + crypto.createHmac('sha1', secret).update(payload).digest('hex')
+
+      if not crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(computedSignature))
+        throw "Could not validate GitHub message"
 
       eventHeader = req.headers["x-github-event"]
 
