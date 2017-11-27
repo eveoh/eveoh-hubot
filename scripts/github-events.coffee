@@ -52,8 +52,8 @@ module.exports = (robot) ->
 
       # Verify the request
       secret = process.env.HUBOT_GITHUB_SHARED_SECRET
-      signature = req.headers["X-Hub-Signature"]
-      computedSignature = 'sha1=' + crypto.createHmac('sha1', secret).update(payload).digest('hex')
+      signature = req.headers["x-hub-signature"]
+      computedSignature = 'sha1=' + crypto.createHmac('sha1', secret).update(JSON.stringify(payload)).digest('hex')
 
       if not crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(computedSignature))
         throw "Could not validate GitHub message"

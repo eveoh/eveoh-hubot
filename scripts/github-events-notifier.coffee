@@ -65,19 +65,17 @@ module.exports = (robot) ->
     payload = data.payload
     user = data.user
 
-    # Status event from Jenkins / Travis
-    if payload.sender.login == "eveoh-ci" or payload.context == "continuous-integration/travis-ci/push"
-      msg = "[#{payload.repository.name}] "
+    msg = "[#{payload.repository.name}] "
 
-      switch payload.state
-        when "failure" then msg += "Build failed"
-        when "error" then msg += "Build error"
-        when "success" then msg += "Build succeeded"
+    switch payload.state
+      when "failure" then msg += "Build failed"
+      when "error" then msg += "Build error"
+      when "success" then msg += "Build succeeded"
 
-      if payload.target_url? then msg += " (" + payload.target_url + ")"
+    if payload.target_url? then msg += " (" + payload.target_url + ")"
 
-      if payload.state != "pending"
-        robot.send user, msg
+    if payload.state != "pending"
+      robot.send user, msg
 
   robot.on "github-repository", (data) ->
       payload = data.payload
