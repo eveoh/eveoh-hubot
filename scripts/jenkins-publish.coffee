@@ -20,8 +20,6 @@
 #   marcokrikke
 
 module.exports = (robot) ->
-  robot.brain.data.jenkinstokens ?= {}
-
   robot.respond /publish (.*) commit ([0-9a-f]{5,40})/i, (msg) ->
     repo = msg.match[1]
     specifier = msg.match[2]
@@ -42,28 +40,40 @@ module.exports = (robot) ->
 
 
   startPublishJob = (msg, repo, specifier) ->
-    data = JSON.stringify({
-      parameter: [
-        {
-          "name": "SPECIFIER",
-          "value": specifier
-        }
-      ]
-    })
-
-    repoJob = "#{repo}-publish"
-
     auth = new Buffer("#{process.env.HUBOT_JENKINS_CI_USER_USERNAME}:#{process.env.HUBOT_JENKINS_CI_USER_TOKEN}").toString('base64')
 
-    robot.http("#{process.env.HUBOT_JENKINS_URL}/job/#{repoJob}/build")
+    # Get Crumb from Jenkins
+    robot.http("#{process.env.HUBOT_JENKINS_URL}/crumbIssuer/api/json")
     .header('Authorization', "Basic #{auth}")
-    .header('Content-Type', 'application/x-www-form-urlencoded')
-    .post("json=#{data}") (err, res, body) ->
+    .get() (err, res, body) ->
       if err
-        msg.send "[publish] Jenkins says: #{err}"
-      else if 201 == res.statusCode
-        msg.send "[publish] Publish build started for project #{repo} and specifier #{specifier}"
-      else if 404 == res.statusCode
-        msg.send "[publish] No publish job found for repository #{repo}"
+        msg.send "[publish] Could not get Crumb. Jenkins says: #{err}"
+        return
       else
-        msg.send "[publish] Jenkins says: Status #{res.statusCode}"
+        crumbData = JSON.parse body
+
+        console.error(crumbData)
+
+        # Start publish job
+        data = JSON.stringify({
+          parameter: [
+            {
+              "name": "SPECIFIER",
+              "value": specifier
+            }
+          ]
+        })
+
+        robot.http("#{process.env.HUBOT_JENKINS_URL}/job/#{repo}-publish/build")
+          .header('Authorization', "Basic #{auth}")
+          .header('Content-Type', 'application/x-www-form-urlencoded')
+          .header(crumbData.crumbRequestField, crumbData.crumb)
+          .post("json=#{data}") (err, res) ->
+            if err
+              msg.send "[publish] Jenkins says: #{err}"
+            else if 201 == res.statusCode
+              msg.send "[publish] Publish build started for project #{repo} and specifier #{specifier}"
+            else if 404 == res.statusCode
+              msg.send "[publish] No publish job found for repository #{repo}"
+            else
+              msg.send "[publish] Jenkins says: Status #{res.statusCode}"
