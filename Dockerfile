@@ -45,4 +45,4 @@ RUN npm install
 
 EXPOSE 8080
 
-ENTRYPOINT [ "sh", "-c", "/opt/hubot/bin/hubot --name eveoh --adapter matteruser" ]
+ENTRYPOINT [ "sh", "-c", "/opt/hubot/bin/hubot --name hubot --adapter matteruser" ]
