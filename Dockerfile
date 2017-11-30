@@ -3,14 +3,11 @@ FROM node:8.9.1-alpine
 ENV HUBOT_HOME /opt/hubot
 
 ENV HUBOT_AUTH_ADMIN user
-ENV HUBOT_IRC_SERVER irc.host.com
-ENV HUBOT_IRC_ROOMS #room roompass
-ENV HUBOT_IRC_PORT 6667
-ENV HUBOT_IRC_UNFLOOD true
-ENV HUBOT_IRC_DEBUG true
-ENV HUBOT_IRC_NICKSERV_USERNAME username
-ENV HUBOT_IRC_NICKSERV_PASSWORD password
-ENV HUBOT_IRC_PRIVATE true
+
+ENV MATTERMOST_HOST mattermost.host.com
+ENV MATTERMOST_GROUP team
+ENV MATTERMOST_USER user
+ENV MATTERMOST_PASSWORD pass
 
 ENV HUBOT_GIPHY_API_KEY key
 
@@ -48,4 +45,4 @@ RUN npm install
 
 EXPOSE 8080
 
-ENTRYPOINT [ "sh", "-c", "/opt/hubot/bin/hubot --name eveoh --adapter irc" ]
+ENTRYPOINT [ "sh", "-c", "/opt/hubot/bin/hubot --name eveoh --adapter matteruser" ]
