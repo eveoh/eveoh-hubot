@@ -3,17 +3,17 @@
 #
 # Commands:
 
-TIMEZONE = "Europe/Amsterdam"
-WEEKEND_TIME = '00 00 17 * * 5' # F 5pm
-ROOM = "#eveoh"
+CRON_TZ = process.env.HUBOT_WEEKEND_CRON_TZ
+CRON_EXP = process.env.HUBOT_WEEKEND_CRON_EXP
+ROOM = process.env.HUBOT_WEEKEND_ROOM
 
 cronJob = require('cron').CronJob
 
 module.exports = (robot) ->
-  new cronJob WEEKEND_TIME,
+  new cronJob CRON_EXP,
     ->
       robot.messageRoom ROOM, "It's weeeeeeeeeeeeeeeeeeeekend!"
       robot.messageRoom ROOM, "http://img.444.hu/baxxter-animated.gif"
     null
     true
-    TIMEZONE
+    CRON_TZ

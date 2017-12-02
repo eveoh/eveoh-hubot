@@ -28,6 +28,9 @@ ENV HUBOT_GOOGLE_CSE_KEY key
 
 ENV HUBOT_GITHUB_SHARED_SECRET secret
 
+ENV HUBOT_WEEKEND_CRON_EXP 0 0 17 * * 5
+ENV HUBOT_WEEKEND_CRON_TZ Europe/Amsterdam
+ENV HUBOT_WEEKEND_ROOM town-square
 
 RUN mkdir -p $HUBOT_HOME \
     && addgroup hubot \
