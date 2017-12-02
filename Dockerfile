@@ -32,6 +32,10 @@ ENV HUBOT_WEEKEND_CRON_EXP 0 0 17 * * 5
 ENV HUBOT_WEEKEND_CRON_TZ Europe/Amsterdam
 ENV HUBOT_WEEKEND_ROOM town-square
 
+ENV HUBOT_CLEANERS_CRON_EXP 0 0 16 * * 1
+ENV HUBOT_CLEANERS_CRON_TZ Europe/Amsterdam
+ENV HUBOT_CLEANERS_ROOM town-square
+
 RUN mkdir -p $HUBOT_HOME \
     && addgroup hubot \
     && adduser -h $HUBOT_HOME -D -s /bin/bash -G hubot hubot \

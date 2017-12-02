@@ -1,11 +1,11 @@
 # Description:
-#   Alert when the cleaner will come by.
+#   Alert when the cleaners will come.
 #
 # Commands:
 
-TIMEZONE = "Europe/Amsterdam"
-CRON = '00 00 16 * * 1' # Mon 1pm
-ROOM = "#eveoh"
+CRON_TZ = process.env.HUBOT_CLEANERS_CRON_TZ
+CRON_EXP = process.env.HUBOT_CLEANERS_CRON_EXP
+ROOM = process.env.HUBOT_CLEANERS_ROOM
 
 desks = [
   "https://media.giphy.com/media/z5fNH8BMbeDN6/giphy.gif",
@@ -31,14 +31,13 @@ desks = [
   "https://media.giphy.com/media/3oKIPCSX4UHmuS41TG/giphy.gif"
 ]
 
-
 cronJob = require('cron').CronJob
 
 module.exports = (robot) ->
-  new cronJob CRON,
+  new cronJob CRON_EXP,
     ->
       robot.messageRoom ROOM, "Morgen komt de schoonmaker weer!"
       robot.messageRoom ROOM, desks[Math.floor(Math.random() * desks.length)];
     null
     true
-    TIMEZONE
+    CRON_TZ
