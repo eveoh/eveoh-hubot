@@ -28,7 +28,12 @@ desks = [
   "https://media.giphy.com/media/yOMOCCYI0sEMw/giphy.gif",
   "https://media.giphy.com/media/WdIaMQ6bLlvtm/giphy.gif",
   "https://media.giphy.com/media/l44QfSJkfcLayU8Ny/giphy.gif",
-  "https://media.giphy.com/media/3oKIPCSX4UHmuS41TG/giphy.gif"
+  "https://media.giphy.com/media/3oKIPCSX4UHmuS41TG/giphy.gif",
+  "https://media.giphy.com/media/7OkKFU3EGQJaw/giphy.gif",
+  "https://media.giphy.com/media/VzwrrgjLyRzJS/giphy.gif",
+  "https://media.giphy.com/media/12H5QrSgeF6qsM/giphy.gif",
+  "https://media.giphy.com/media/xUOxfoOCQuKkcnSTEQ/source.gif",
+  "https://media.giphy.com/media/3Fnj18Oi9fsSA/giphy.gif"
 ]
 
 cronJob = require('cron').CronJob
