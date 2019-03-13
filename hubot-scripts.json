@@ -1,6 +1,5 @@
 [
   "giphy.coffee",
-  "github-status.coffee",
   "github-credentials.coffee",
   "github-pulls.coffee",
   "github-issue-link.coffee",
