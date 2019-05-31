@@ -5,6 +5,7 @@
 
 CRON_TZ = process.env.HUBOT_CLEANERS_CRON_TZ
 CRON_EXP = process.env.HUBOT_CLEANERS_CRON_EXP
+CLEANERS_MESSAGE = process.env.HUBOT_CLEANERS_MESSAGE
 ROOM = process.env.HUBOT_CLEANERS_ROOM
 
 desks = [
@@ -41,7 +42,7 @@ cronJob = require('cron').CronJob
 module.exports = (robot) ->
   new cronJob CRON_EXP,
     ->
-      robot.messageRoom ROOM, "Morgen komt de schoonmaker weer!"
+      robot.messageRoom ROOM, CLEANERS_MESSAGE
       robot.messageRoom ROOM, desks[Math.floor(Math.random() * desks.length)];
     null
     true
