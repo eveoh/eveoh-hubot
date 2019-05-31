@@ -32,9 +32,10 @@ ENV HUBOT_WEEKEND_CRON_EXP 0 0 17 * * 5
 ENV HUBOT_WEEKEND_CRON_TZ Europe/Amsterdam
 ENV HUBOT_WEEKEND_ROOM town-square
 
-ENV HUBOT_CLEANERS_CRON_EXP 0 0 16 * * 1
+ENV HUBOT_CLEANERS_CRON_EXP 0 0 15 * * 1
 ENV HUBOT_CLEANERS_CRON_TZ Europe/Amsterdam
 ENV HUBOT_CLEANERS_ROOM town-square
+ENV HUBOT_CLEANERS_MESSAGE Vanavond komt de schoonmaker weer!
 
 RUN mkdir -p $HUBOT_HOME \
     && addgroup hubot \
