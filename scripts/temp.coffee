@@ -6,7 +6,7 @@
 
 module.exports = (robot) ->
   robot.respond /temp/i, (msg) ->
-    robot.http("https://api.particle.io/v1/devices/#{process.env.HUBOT_SPARK_DEVICE_ID}/temperature?access_token=#{process.env.HUBOT_SPARK_ACCESS_TOKEN}")
+    robot.http("https://api.particle.io/v1/devices/#{process.env.HUBOT_PARTICLE_DEVICE_ID}/temperature?access_token=#{process.env.HUBOT_PARTICLE_ACCESS_TOKEN}")
       .header('Accept', 'application/json')
       .get() (err, res, body) ->
         if err
