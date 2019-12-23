@@ -77,6 +77,27 @@ module.exports = (robot) ->
     if payload.state != "pending"
       robot.send user, msg
 
+  robot.on "github-check_suite", (data) ->
+    payload = data.payload
+    user = data.user
+
+    if payload.action == 'completed'
+      msg = "[#{payload.repository.name}] Checks "
+
+      switch payload.check_suite.conclusion
+        when "success" then msg += "succeeded"
+        when "failure" then msg += "failed"
+        when "neutral" then msg += "neutral"
+        when "cancelled" then msg += "cancelled"
+        when "timed_out" then msg += "timed out"
+        when "action_required" then msg += "require action"
+
+      prLinks = payload.check_suite.pull_requests.map (pr) -> "[#{pr.number}](https://github.com/eveoh/mytimetable/pull/#{pr.number})"
+
+      msg += " for pull request(s) " + prLinks.join(', ')
+
+      robot.send user, msg
+
   robot.on "github-repository", (data) ->
       payload = data.payload
       user = data.user
