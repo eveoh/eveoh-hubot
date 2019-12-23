@@ -92,7 +92,7 @@ module.exports = (robot) ->
         when "timed_out" then msg += "timed out"
         when "action_required" then msg += "require action"
 
-      prLinks = payload.check_suite.pull_requests.map (pr) -> "[#{pr.number}](https://github.com/eveoh/mytimetable/pull/#{pr.number})"
+      prLinks = payload.check_suite.pull_requests.map (pr) -> "[##{pr.number}](#{payload.repository.html_url}/pull/#{pr.number})"
 
       msg += " for pull request(s) " + prLinks.join(', ')
 
