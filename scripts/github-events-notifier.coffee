@@ -18,16 +18,16 @@
 
 module.exports = (robot) ->
 
-  robot.on "github-push", (data) ->
-    payload = data.payload
-    user = data.user
-
-    if payload.commits.length > 0
-      commitWord = if payload.commits.length > 1 then "commits" else "commit"
-      pushWord = if payload.forced then "force pushed" else "pushed"
-      branch = payload.ref.replace /refs\/heads\//, ''
-
-      robot.send user, "[#{payload.repository.name}] #{payload.pusher.name} #{pushWord} #{payload.commits.length} new #{commitWord} to #{branch}: #{payload.compare}"
+#  robot.on "github-push", (data) ->
+#    payload = data.payload
+#    user = data.user
+#
+#    if payload.commits.length > 0
+#      commitWord = if payload.commits.length > 1 then "commits" else "commit"
+#      pushWord = if payload.forced then "force pushed" else "pushed"
+#      branch = payload.ref.replace /refs\/heads\//, ''
+#
+#      robot.send user, "[#{payload.repository.name}] #{payload.pusher.name} #{pushWord} #{payload.commits.length} new #{commitWord} to #{branch}: #{payload.compare}"
 
   robot.on "github-create", (data) ->
     payload = data.payload
@@ -35,11 +35,11 @@ module.exports = (robot) ->
 
     robot.send user, "[#{payload.repository.name}] #{payload.sender.login} created #{payload.ref_type}: #{payload.ref}"
 
-  robot.on "github-delete", (data) ->
-    payload = data.payload
-    user = data.user
-
-    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} deleted #{payload.ref_type}: #{payload.ref}"
+#  robot.on "github-delete", (data) ->
+#    payload = data.payload
+#    user = data.user
+#
+#    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} deleted #{payload.ref_type}: #{payload.ref}"
 
   robot.on "github-pull_request", (data) ->
     payload = data.payload
@@ -49,8 +49,8 @@ module.exports = (robot) ->
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request ##{payload.pull_request.number} '#{payload.pull_request.title}' to #{payload.assignee.login}: #{payload.pull_request.html_url}"
     else if payload.action == 'review_requested'
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} requested a review from #{payload.requested_reviewer.login} for pull request ##{payload.pull_request.number} '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
-    else if payload.action in ['opened', 'closed', 'reopened']
-      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request ##{payload.pull_request.number} '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
+#    else if payload.action in ['opened', 'closed', 'reopened']
+#      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} pull request ##{payload.pull_request.number} '#{payload.pull_request.title}': #{payload.pull_request.html_url}"
 
   robot.on "github-issues", (data) ->
     payload = data.payload
@@ -58,8 +58,8 @@ module.exports = (robot) ->
 
     if payload.action == 'assigned'
       robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}' to #{payload.assignee.login}: #{payload.issue.html_url}"
-    else if payload.action in ['opened', 'closed', 'reopened']
-      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
+#    else if payload.action in ['opened', 'closed', 'reopened']
+#      robot.send user, "[#{payload.repository.name}] #{payload.sender.login} #{payload.action} issue ##{payload.issue.number} '#{payload.issue.title}': #{payload.issue.html_url}"
 
   robot.on "github-status", (data) ->
     payload = data.payload
