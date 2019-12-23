@@ -30,9 +30,10 @@ module.exports = (robot) ->
   ignoredEvents = ignoredEvents.split ","
 
   # See https://developer.github.com/webhooks/#events
-  allEvents = ['create_comment', 'create', 'delete', 'deployment', 'deployment_status', 'fork', 'gollum',
-    'issue_comment', 'issues', 'member', 'membership', 'page_build', 'public', 'pull_request_review_comment',
-    'pull_request', 'push', 'repository', 'release', 'status', 'team_add', 'watch']
+  allEvents = ['check_run', 'check_suite', 'commit_comment', 'content-reference', 'create', 'delete', 'deployment', 
+    'deployment_status', 'fork', 'gollum', 'issue_comment', 'issues', 'member', 'membership', 'page_build', 
+    'public', 'pull_request_review_comment', 'pull_request', 'push', 'repository', 'release', 'status', 'team_add', 
+    'watch']
 
   # Events to handle
   events = []
