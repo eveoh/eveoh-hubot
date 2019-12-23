@@ -29,11 +29,11 @@ module.exports = (robot) ->
 #
 #      robot.send user, "[#{payload.repository.name}] #{payload.pusher.name} #{pushWord} #{payload.commits.length} new #{commitWord} to #{branch}: #{payload.compare}"
 
-  robot.on "github-create", (data) ->
-    payload = data.payload
-    user = data.user
-
-    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} created #{payload.ref_type}: #{payload.ref}"
+#  robot.on "github-create", (data) ->
+#    payload = data.payload
+#    user = data.user
+#
+#    robot.send user, "[#{payload.repository.name}] #{payload.sender.login} created #{payload.ref_type}: #{payload.ref}"
 
 #  robot.on "github-delete", (data) ->
 #    payload = data.payload
