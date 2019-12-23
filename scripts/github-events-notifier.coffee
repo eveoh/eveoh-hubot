@@ -92,9 +92,12 @@ module.exports = (robot) ->
         when "timed_out" then msg += "timed out"
         when "action_required" then msg += "require action"
 
-      prLinks = payload.check_suite.pull_requests.map (pr) -> "[##{pr.number}](#{payload.repository.html_url}/pull/#{pr.number})"
+      if payload.check_suite.pull_requests.length > 0
+        prLinks = payload.check_suite.pull_requests.map (pr) -> "[##{pr.number}](#{payload.repository.html_url}/pull/#{pr.number})"
 
-      msg += " for pull request(s) " + prLinks.join(', ')
+        msg += " for pull request(s) " + prLinks.join(', ')
+      else 
+        msg += " for branch #{payload.check_suite.head_branch}"
 
       robot.send user, msg
 
